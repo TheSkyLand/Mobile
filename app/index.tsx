@@ -1,12 +1,9 @@
 import { useState } from "react";
-import { Text, View } from "react-native";
+import { Button, Text, View } from "react-native";
 import { Ref } from "react";
-import { Button } from "react-native";
 import { StyleSheet, TextInput } from 'react-native';
 import React from "react";
 import { useEffect } from "react";
-
-
 
 
 export default function Index() {
@@ -15,32 +12,50 @@ export default function Index() {
   const [seconds, setSeconds] = useState(0);
 
 
-  const deadline = seconds
+  const [targetHours, setTargetHours] = useState('')
+  const [targetMinutes, setTargetMinutes] = useState('')
+  const [targetSeconds, setTargetSeconds] = useState('')
+
+
+
+
+
+  const deadline = `${targetHours}, ${targetMinutes}, ${targetHours}`
   const getTime = () => {
-    const time = deadline;
+  const time = Date.parse(deadline) - Date.now();
 
     setHours(Math.floor((time / (1000 * 60 * 60)) % 24));
     setMinutes(Math.floor((time / 1000 / 60) % 60));
     setSeconds(Math.floor((time / 1000) % 60));
+
   };
 
-  useEffect(() => {
-    const interval = setInterval(() => getTime(), 1000);
 
-    return () => clearInterval(interval);
-  }, []);
+function start() {
+  const interval = setInterval(() => getTime(), 1000);
+
+  return () => clearInterval(interval);
+}
+
+
+
+
+
   return (
     <View>
-      < Input  />
-
       <Text>{hours < 10 ? "0" + hours : hours}</Text>
       <Text>Hours</Text>
       <Text >{minutes < 10 ? "0" + minutes : minutes}</Text>
       <Text>Minutes</Text>
       <Text >{seconds < 10 ? "0" + seconds : seconds}</Text>
       <Text>Seconds</Text>
-
-      <button>START</button>
+      <TextInput  onChangeText={newSeconds => setTargetSeconds(newSeconds)} />
+      <Text>e Seconds</Text>
+      <TextInput  onChangeText={newMinutes => setTargetMinutes(newMinutes)} />
+      <Text>e Minutes</Text>
+      <TextInput onChangeText={newHours => setTargetHours(newHours)} />
+      <Text>e Hours</Text>
+      <Button onPress={start}>start</Button>
     </View>
   );
 }
