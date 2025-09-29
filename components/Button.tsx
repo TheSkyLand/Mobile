@@ -1,6 +1,7 @@
 import { Dimensions, StyleSheet, Text, TouchableOpacity } from "react-native";
 
-export default ({ onPress, text, size, theme }) => {
+export default function Button({ onPress, text, size, theme }) 
+{
   const buttonStyles = [styles.button];
   const textStyles = [styles.text];
 
