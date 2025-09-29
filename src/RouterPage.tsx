@@ -43,6 +43,13 @@ export default function Home({ navigation }: any) {
                     style={styles.button}
                 >Шашки</Text>
             </TouchableOpacity>
+            <TouchableOpacity
+
+                onPress={() => navigation.navigate('CalculatorTest')}>
+                <Text
+                    style={styles.button}
+                >Калькулятор</Text>
+            </TouchableOpacity>
         </View>
     );
 }
