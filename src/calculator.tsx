@@ -1,27 +1,72 @@
 import * as React from 'react'
 import { View, TouchableOpacity } from "react-native"
-import Numpad from '@/components/Numpad';
+import Numpad from '@/app/components/Numpad';
 import { StyleSheet } from 'react-native';
-import NumberField from '@/components/NumberField';
+import NumberField from '@/app/components/numberField';
 
-export default function Calculator() {
+const Calculator = () => {
     let p = [];
     for (let i = 0; i < 10; i++) {
         p.push(i);
     }
-    const [InputNum, setInput] = React.useState('');
-    const [SecondNum, setSecond] = React.useState('');
+    const [bufferNum, setBufferNum] = React.useState('')
+    const [inputNum, setInput] = React.useState('');
+    const [secondNum, setSecond] = React.useState('');
+    const [operator, setOperator] = React.useState('');
+    const [inputType, setInputType] = React.useState("InputNum");
     const backNum = (value: any) => {
-        setInput(InputNum + value.toString());
-    }
-    const secondNum = (value: any) => {
-        setSecond(SecondNum + value.toString());
+
+        setInput(inputNum + value.toString())
+
     }
 
+    const handleOperator = (operator: string) => {
+        setOperator(operator)
 
-    const HandleEquation = (operator: any) => {
         switch (operator) {
             case "+": {
+                setBufferNum(inputNum)
+                setSecond(inputNum + operator.toString())
+                break
+            }
+            case "-": {
+                setBufferNum(inputNum)
+                setSecond(inputNum + operator.toString())
+                break
+            }
+            case "*": {
+                setBufferNum(inputNum)
+                setSecond(inputNum + operator.toString())
+                break
+            }
+            case "/": {
+                setBufferNum(inputNum)
+                setSecond(inputNum + operator.toString())
+                break
+            }
+        }
+    }
+    const handleEquation = (operator: any) => {
+        switch (operator) {
+            case "+": {
+                let result = Number(bufferNum) + Number(inputNum)
+                setInput(result.toString())
+                break
+            }
+            case "-": {
+                let result = Number(bufferNum) - Number(inputNum)
+                setInput(result.toString())
+                break
+            }
+            case "*": {
+                let result = Number(bufferNum) * Number(inputNum)
+                setInput(result.toString())
+                break
+            }
+            case "/": {
+                let result = Number(bufferNum) / Number(inputNum)
+                setInput(result.toString())
+                break
             }
         }
     }
@@ -31,7 +76,10 @@ export default function Calculator() {
                 style={styles.box}
             >
                 <NumberField
-                    inputStr={InputNum}
+                    inputStr={inputNum}
+                />
+                <NumberField
+                    inputStr={secondNum}
                 />
                 {p.map((item, index) => (
                     <Numpad
@@ -46,27 +94,30 @@ export default function Calculator() {
                 >
                     <TouchableOpacity
                         style={styles.button2}
-
+                        onPress={(e) => handleOperator("+")}
                     >
                         +
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={styles.button2}
+                        onPress={(e) => handleOperator("-")}
                     >
                         -
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={styles.button2}
+                        onPress={(e) => handleOperator("*")}
                     >
                         *
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={styles.button2}
+                        onPress={(e) => handleOperator("/")}
                     >
                         ÷
                     </TouchableOpacity>
                     <TouchableOpacity
-                        onPress={(e) => HandleEquation()}
+                        onPress={(e) => handleEquation(operator)}
                     >
                         =
                     </TouchableOpacity>
@@ -107,3 +158,5 @@ const styles = StyleSheet.create({
         width: 100,
     },
 })
+
+export default Calculator
