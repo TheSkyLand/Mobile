@@ -1,8 +1,9 @@
+
 import * as React from 'react'
 import { View, TouchableOpacity } from "react-native"
-import Numpad from '@/app/components/Numpad';
 import { StyleSheet } from 'react-native';
-import NumberField from '@/app/components/numberField';
+import NumberField from '@/components/numberField';
+import Numpad from '@/components/calculatorNumbers';
 
 const Calculator = () => {
     let p = [];
@@ -12,8 +13,8 @@ const Calculator = () => {
     const [bufferNum, setBufferNum] = React.useState('')
     const [inputNum, setInput] = React.useState('');
     const [secondNum, setSecond] = React.useState('');
+    const [result, setResult] = React.useState('');
     const [operator, setOperator] = React.useState('');
-    const [inputType, setInputType] = React.useState("InputNum");
     const backNum = (value: any) => {
 
         setInput(inputNum + value.toString())
@@ -22,53 +23,63 @@ const Calculator = () => {
 
     const handleOperator = (operator: string) => {
         setOperator(operator)
-
         switch (operator) {
             case "+": {
                 setBufferNum(inputNum)
-                setSecond(inputNum + operator.toString())
+                setInput('')
+                setSecond(inputNum + bufferNum)
                 break
             }
             case "-": {
                 setBufferNum(inputNum)
-                setSecond(inputNum + operator.toString())
+                setInput('')
+                setSecond(inputNum + bufferNum)
                 break
             }
             case "*": {
                 setBufferNum(inputNum)
-                setSecond(inputNum + operator.toString())
+                setInput('')
+                setSecond(inputNum + bufferNum)
                 break
             }
             case "/": {
                 setBufferNum(inputNum)
-                setSecond(inputNum + operator.toString())
+                setInput('')
+                setSecond(inputNum + bufferNum)
                 break
             }
         }
     }
     const handleEquation = (operator: any) => {
+        console.log(result);
         switch (operator) {
             case "+": {
                 let result = Number(bufferNum) + Number(inputNum)
-                setInput(result.toString())
+                setSecond(inputNum.toString() + operator.toString() + secondNum.toString() + "=" + result.toString())
                 break
             }
             case "-": {
                 let result = Number(bufferNum) - Number(inputNum)
-                setInput(result.toString())
+                setSecond(inputNum.toString() + operator.toString() + secondNum.toString() + "=" + result.toString())
                 break
             }
             case "*": {
                 let result = Number(bufferNum) * Number(inputNum)
-                setInput(result.toString())
+                setSecond(inputNum.toString() + operator.toString() + secondNum.toString() + "=" + result.toString())
                 break
             }
             case "/": {
                 let result = Number(bufferNum) / Number(inputNum)
-                setInput(result.toString())
+                setSecond(inputNum.toString() + operator.toString() + secondNum.toString() + "=" + result.toString())
                 break
             }
         }
+    }
+
+    const handleClear = () => {
+        setSecond('')
+        setBufferNum('')
+        setInput('')
     }
     return (
         <View>
@@ -76,10 +87,10 @@ const Calculator = () => {
                 style={styles.box}
             >
                 <NumberField
-                    inputStr={inputNum}
+                    inputStr={secondNum}
                 />
                 <NumberField
-                    inputStr={secondNum}
+                    inputStr={inputNum}
                 />
                 {p.map((item, index) => (
                     <Numpad
@@ -123,7 +134,7 @@ const Calculator = () => {
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={styles.button2}
-                        onPress={() => setInput('')}
+                        onPress={handleClear}
                     >Clear
                     </TouchableOpacity>
                 </View>
