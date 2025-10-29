@@ -8,7 +8,6 @@ type CalculatorNumbersProps = {
 }
 
 export default function Numpad(props: CalculatorNumbersProps) {
-    let p = [];
     const test = (t: number) => {
 
         props.back(t);
@@ -27,10 +26,13 @@ export default function Numpad(props: CalculatorNumbersProps) {
 }
 
 const styles = StyleSheet.create({
-    button:{
-        display:"flex",
-        fontSize:40,
-        borderColor:"black",
+    button: {
+        display: "flex",
+        fontSize: 40,
+        borderColor: "black",
         borderWidth: 1,
-    }
+        borderRadius: 100,
+        margin: 10,
+        padding: 10
+    },
 })

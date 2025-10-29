@@ -1,9 +1,8 @@
-
 import * as React from 'react'
 import { View, TouchableOpacity } from "react-native"
 import { StyleSheet } from 'react-native';
 import NumberField from '@/components/numberField';
-import Numpad from '@/components/calculatorNumbers';
+import Numpad from '@/components/Numpad';
 
 const Calculator = () => {
     let p = [];
@@ -13,7 +12,6 @@ const Calculator = () => {
     const [bufferNum, setBufferNum] = React.useState('')
     const [inputNum, setInput] = React.useState('');
     const [secondNum, setSecond] = React.useState('');
-    const [result, setResult] = React.useState('');
     const [operator, setOperator] = React.useState('');
     const backNum = (value: any) => {
 
@@ -27,53 +25,56 @@ const Calculator = () => {
             case "+": {
                 setBufferNum(inputNum)
                 setInput('')
-                setSecond(inputNum + bufferNum)
+                setSecond(inputNum + operator.toString())
                 break
             }
             case "-": {
                 setBufferNum(inputNum)
                 setInput('')
-                setSecond(inputNum + bufferNum)
+                setSecond(inputNum + operator.toString())
                 break
             }
             case "*": {
                 setBufferNum(inputNum)
                 setInput('')
-                setSecond(inputNum + bufferNum)
+                setSecond(inputNum + operator.toString())
                 break
             }
             case "/": {
                 setBufferNum(inputNum)
                 setInput('')
-                setSecond(inputNum + bufferNum)
+                setSecond(inputNum + operator.toString())
                 break
             }
         }
     }
     const handleEquation = (operator: any) => {
-        console.log(result);
         switch (operator) {
             case "+": {
                 let result = Number(bufferNum) + Number(inputNum)
-                setSecond(inputNum.toString() + operator.toString() + secondNum.toString() + "=" + result.toString())
+                setSecond(bufferNum.toString() + operator + inputNum.toString() + "=" + result.toString())
                 break
             }
             case "-": {
                 let result = Number(bufferNum) - Number(inputNum)
-                setSecond(inputNum.toString() + operator.toString() + secondNum.toString() + "=" + result.toString())
+                setSecond(bufferNum.toString() + operator + inputNum.toString() + "=" + result.toString())
                 break
+                
             }
             case "*": {
                 let result = Number(bufferNum) * Number(inputNum)
-                setSecond(inputNum.toString() + operator.toString() + secondNum.toString() + "=" + result.toString())
+                setSecond(bufferNum.toString() + operator + inputNum.toString() + "=" + result.toString())
                 break
+                
             }
             case "/": {
                 let result = Number(bufferNum) / Number(inputNum)
-                setSecond(inputNum.toString() + operator.toString() + secondNum.toString() + "=" + result.toString())
+                setSecond(bufferNum.toString() + operator + inputNum.toString() + "=" + result.toString())
                 break
+                
             }
         }
+        setInput('');
     }
 
     const handleClear = () => {
@@ -98,8 +99,6 @@ const Calculator = () => {
                         back={backNum}
                     />
                 ))}
-            </View>
-            <View>
                 <View
                     style={styles.box2}
                 >
@@ -128,6 +127,7 @@ const Calculator = () => {
                         ÷
                     </TouchableOpacity>
                     <TouchableOpacity
+                        style={styles.button2}
                         onPress={(e) => handleEquation(operator)}
                     >
                         =
@@ -138,6 +138,7 @@ const Calculator = () => {
                     >Clear
                     </TouchableOpacity>
                 </View>
+
             </View>
         </View>
     )
@@ -148,25 +149,22 @@ const styles = StyleSheet.create({
         display: "flex",
         flexWrap: "wrap",
         flexDirection: "row",
-        width: 80,
-    },
-    button: {
-        display: "flex",
-        fontSize: 40,
-        borderColor: "black",
-        borderWidth: 1,
+        width: 200,
     },
     button2: {
         display: "flex",
         fontSize: 40,
         borderColor: "black",
         borderWidth: 1,
+        borderRadius: 100,
+        padding: 10,
+        margin: 10
     },
     box2: {
         display: "flex",
         flexWrap: "wrap",
         flexDirection: "row",
-        width: 100,
+        width: 500,
     },
 })
 
