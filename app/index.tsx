@@ -2,9 +2,9 @@ import React from 'react';
 import { NavigationContainer, NavigationIndependentTree } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Home from '@/router/Router';
-import Calculator from '@/src/calculator';
-import Checkers from '@/src/checkers';
-import Clicker from '@/src/clicker';
+import Calculator from '@/src/Calculator';
+import Checkers from '@/src/Checkers';
+import Clicker from '@/src/Clicker';
 import Weather from '@/src/weather';
 
 

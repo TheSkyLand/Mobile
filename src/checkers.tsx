@@ -1,13 +1,18 @@
 import React from "react"
 import { View } from "react-native"
+import CheckBoard from "../components/CheckBoard"
 
 
 
-export default function Checkers()
+const Checkers = () =>
 {
     return(
         <View>
+            <CheckBoard>
 
+            </CheckBoard>
         </View>
     )
 }
+
+export default Checkers
