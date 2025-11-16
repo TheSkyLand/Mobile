@@ -1,4 +1,5 @@
 import { Button, TouchableOpacity, View } from "react-native"
+import Pawn from "./Pawn"
 
 
 
@@ -96,9 +97,10 @@ const CheckBoard = () => {
                                     height: 75,
                                 }}
                             >
-                                <View>
-                                    {key}
-                                </View>
+                                <Pawn
+                                >
+
+                                </Pawn>
                             </TouchableOpacity>
                         </View>
                     ))}

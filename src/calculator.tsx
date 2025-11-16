@@ -52,25 +52,26 @@ const Calculator = () => {
         }
     }
     const handleEquation = (operator: any) => {
+        let result;
         console.log(result);
         switch (operator) {
             case "+": {
-                let result = Number(bufferNum) + Number(inputNum)
+                result = Number(bufferNum) + Number(inputNum)
                 setSecond(inputNum.toString() + operator.toString() + secondNum.toString() + "=" + result.toString())
                 break
             }
             case "-": {
-                let result = Number(bufferNum) - Number(inputNum)
+                result = Number(bufferNum) - Number(inputNum)
                 setSecond(inputNum.toString() + operator.toString() + secondNum.toString() + "=" + result.toString())
                 break
             }
             case "*": {
-                let result = Number(bufferNum) * Number(inputNum)
+                result = Number(bufferNum) * Number(inputNum)
                 setSecond(inputNum.toString() + operator.toString() + secondNum.toString() + "=" + result.toString())
                 break
             }
             case "/": {
-                let result = Number(bufferNum) / Number(inputNum)
+                result = Number(bufferNum) / Number(inputNum)
                 setSecond(inputNum.toString() + operator.toString() + secondNum.toString() + "=" + result.toString())
                 break
             }
