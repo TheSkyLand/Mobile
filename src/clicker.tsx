@@ -64,7 +64,7 @@ const Clicker = () => {
                     height: 300,
                 }}
             >
-                {changeImage(hp)}
+                {changeImage()}
             </TouchableOpacity>
 
             <Text>HP: {hp}</Text>
