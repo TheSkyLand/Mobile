@@ -1,20 +1,12 @@
 import { Button, TouchableOpacity, View } from "react-native"
 import Pawn from "./Pawn"
-
+import React from "react"
 
 
 
 const CheckBoard = () => {
     let p = []
-
-    let white = 12
-    let black = 12
-
-    let pawn = []
-    pawn.length = 64;
-
-
-
+    const [pawns, setPawns]: any = React.useState([])
     let row = 0;
     for (let i = 0; i < 64; i++) {
         if (i % 8 == 0) {
@@ -40,25 +32,27 @@ const CheckBoard = () => {
         }
     }
 
-    function GameStart(p = []) {
-        for (let i = 64; i >= 0; i--) {
-            if (p[i] == "black") {
-                pawn.push("white")
-                white--;
-            }
+    const CalcPawns = () => {
+        for (let i = 0; i < 12; i++) {
+            pawns.push(i);
         }
-
-        for (let i = 0; i < 64; i++) {
-            if (p[i] == "black") {
-                pawn.push("black")
-                black--;
-            }
+        for (let i = 13; i < 52; i++) {
+            pawns.push(null);
+        }
+        for (let i = 64; i > 52; i--) {
+            pawns.push(i);
         }
     }
-
-    const GameFunc = () => {
-
+    const pawnInd = (key: number) => {
+        let result = pawns.filter(el => el === key)
+        return result
     }
+
+    const GameStart = () => {
+        CalcPawns();
+        console.log(pawns)
+    }
+
 
     return (
         <View>
@@ -67,14 +61,19 @@ const CheckBoard = () => {
             >
                 Start Game
             </TouchableOpacity>
-            <View>
+            <View
+                style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center"
+                }}
+            >
                 <View
                     style={{
                         width: 800,
                         display: "flex",
                         flexWrap: "wrap",
                         flexDirection: "row",
-                        margin: 100,
                     }}
                 >
 
@@ -90,17 +89,13 @@ const CheckBoard = () => {
                         >
 
                             <TouchableOpacity
-                                onPress={() => GameFunc()}
                                 style={{
                                     display: "flex",
                                     width: 75,
                                     height: 75,
                                 }}
                             >
-                                <Pawn
-                                >
-
-                                </Pawn>
+                                {pawnInd(key) ? <Pawn keyNum={pawnInd(2)}></Pawn> : <div></div>}
                             </TouchableOpacity>
                         </View>
                     ))}

@@ -2,8 +2,8 @@
 import * as React from 'react'
 import { View, TouchableOpacity } from "react-native"
 import { StyleSheet } from 'react-native';
-import NumberField from '@/components/NumberField';
-import Numpad from '@/components/CalculatorNumbers';
+import NumberField from '@/components/numberField';
+import Numpad from '@/components/calculatorNumbers';
 
 const Calculator = () => {
     let p = [];
