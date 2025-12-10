@@ -5,9 +5,13 @@ import React from "react"
 
 
 const CheckBoard = () => {
-    let p = []
+    const [p, setP]: any = React.useState([])
     const [pawns, setPawns]: any = React.useState([])
     let row = 0;
+
+    let black = p.filter((el: any) => el === "black")
+    let white = p.filter((el: any) => el === "white")
+
     for (let i = 0; i < 64; i++) {
         if (i % 8 == 0) {
             row++;
@@ -32,24 +36,26 @@ const CheckBoard = () => {
         }
     }
 
-    const CalcPawns = () => {
-        for (let i = 0; i < 12; i++) {
-            pawns.push(i);
-        }
-        for (let i = 13; i < 52; i++) {
-            pawns.push(null);
-        }
-        for (let i = 64; i > 52; i--) {
-            pawns.push(i);
-        }
+    for (let i = 0; i < 12; i++) {
+
+        pawns.push(white[i]);
+
     }
+    for (let i = 13; i < 52; i++) {
+        pawns.push(" ");
+    }
+    for (let i = 64; i > 52; i--) {
+
+        pawns.push(black[i]);
+
+    }
+
     const pawnInd = (key: number) => {
-        let result = pawns.filter(el => el === key)
+        let result = pawns.filter((el: number) => el === key)
         return result
     }
 
     const GameStart = () => {
-        CalcPawns();
         console.log(pawns)
     }
 
@@ -90,12 +96,14 @@ const CheckBoard = () => {
 
                             <TouchableOpacity
                                 style={{
+                                    width: "100%",
+                                    height: "100%",
                                     display: "flex",
-                                    width: 75,
-                                    height: 75,
+                                    justifyContent: "center",
+                                    alignItems: "center",
                                 }}
                             >
-                                {pawnInd(key) ? <Pawn keyNum={pawnInd(2)}></Pawn> : <div></div>}
+                                {pawnInd(key) ? <Pawn keyNum={pawnInd(key)}></Pawn> : null}
                             </TouchableOpacity>
                         </View>
                     ))}

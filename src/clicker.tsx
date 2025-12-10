@@ -2,40 +2,53 @@ import { View, StyleSheet, TouchableOpacity, Text, Image, ImageBackground } from
 import React, { useState } from "react";
 
 const Clicker = () => {
-
-    const [hp, setHp] = useState(6);
-    const [maxHp, setMaxHp] = useState(30);
-
-    let frame = 1;
-
-    const checkHp = () => {
-            frame++;
-    }
+    const [hp, setHp] = useState(60);
+    let frame;
     const handlePress = () => {
-        checkHp();
         setHp(hp - 1);
     }
 
-    const changeImage = (hp: Number) => {
-        switch (hp) {
-            case 6: {
-                return <Image source={require('../assets/images/egg1.png')} />
-            }
-            case 5: {
-                return <Image source={require('../assets/images/egg2.png')} />
-            }
-            case 4: {
-                return <Image source={require('../assets/images/egg3.png')} />
-            }
-            case 3: {
-                return <Image source={require('../assets/images/egg4.png')} />
-            }
-            case 2: {
-                return <Image source={require('../assets/images/egg5.png')} />
-            }
-            case 1: {
-                return <Image source={require('../assets/images/egg6.png')} />
-            }
+    const changeImage = () => {
+        if (hp > 50) {
+            return <Image source={require('../assets/images/egg1.png')} />
+        }
+        else if (hp > 40) {
+            return <Image source={require('../assets/images/egg2.png')} />
+        }
+        else if (hp > 30) {
+            return <Image source={require('../assets/images/egg3.png')} />
+        }
+        else if (hp > 20 ) {
+            return <Image source={require('../assets/images/egg4.png')} />
+        }
+        else if (hp > 10) {
+            return <Image source={require('../assets/images/egg5.png')} />
+        }
+        else if (hp > 5) {
+            return <Image source={require('../assets/images/egg6.png')} />
+        }
+
+        if (hp === 0) {
+            return (<View
+                style={{
+                    position: "absolute",
+                    display: "flex",
+                    alignContent: "center",
+                    justifyContent: "center",
+                    alignItems: "center"
+                }}
+            >
+                <View
+
+                >
+                    <TouchableOpacity
+                        onPress={() => setHp(60)}
+                    >
+                        do you want to restart
+                    </TouchableOpacity>
+
+                </View>
+            </View>)
         }
     }
 
@@ -43,17 +56,16 @@ const Clicker = () => {
 
     return (
         <View>
-            <TouchableOpacity onPress={handlePress}>
-                <Text>click</Text>
-            </TouchableOpacity>
-            <View
+
+            <TouchableOpacity
+                onPress={handlePress}
                 style={{
                     width: 300,
                     height: 300,
                 }}
             >
                 {changeImage(hp)}
-            </View>
+            </TouchableOpacity>
 
             <Text>HP: {hp}</Text>
         </View>

@@ -1,28 +1,33 @@
 import { TouchableOpacity, View } from "react-native"
 
-interface PawnProps{
-keyNum: number;
+interface PawnProps {
+    keyNum: number;
 
 }
 
 const Pawn = (props: PawnProps) => {
 
-    return(
+    return (
         <TouchableOpacity
-        style={{
-
-            width: 50,
-            height: 50,
-            backgroundColor: "gray",
-            borderRadius: 50,
-            shadowColor: "black",
-            borderColor: "black"
-        }}  
+            style={{
+                backgroundColor: "black",
+                borderRadius: 50,
+                borderWidth: 5,
+                shadowColor: "grey",
+                borderColor: "grey"
+            }}
         >
-            {props.keyNum}
+            <View
+            style={{
+                backgroundColor: "white"
+            }}
+            >
+                {props.keyNum}
+            </View>
+
         </TouchableOpacity>
     )
-} 
+}
 
 
 
