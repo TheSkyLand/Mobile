@@ -5,13 +5,9 @@ import React from "react"
 
 
 const CheckBoard = () => {
-    const [p, setP]: any = React.useState([])
+    let p = []
     const [pawns, setPawns]: any = React.useState([])
     let row = 0;
-
-    let black = p.filter((el: any) => el === "black")
-    let white = p.filter((el: any) => el === "white")
-
     for (let i = 0; i < 64; i++) {
         if (i % 8 == 0) {
             row++;
@@ -37,33 +33,44 @@ const CheckBoard = () => {
     }
 
     for (let i = 0; i < 12; i++) {
-
-        pawns.push(white[i]);
-
+        pawns.push(i);
     }
-    for (let i = 13; i < 52; i++) {
-        pawns.push(" ");
+    for (let i = 12; i < 52; i++) {
+        pawns.push(null);
     }
     for (let i = 64; i > 52; i--) {
-
-        pawns.push(black[i]);
-
+        pawns.push(i - 1);
     }
 
     const pawnInd = (key: number) => {
-        let result = pawns.filter((el: number) => el === key)
+        let result = pawns.filter((el: any) => el === key)
         return result
     }
+    const blackInd = (key: number) => {
+        let t = [];
+        let result = [];
+        for (let i = 0; i < pawns.length; i++) {
+            if (pawns[i] == p[i]) {
+                t.push(i)
+            }
+            else if(p[i] === "") {
+                t.push(null)
+            }
+        }
 
-    const GameStart = () => {
-        console.log(pawns)
+
+        for (let i = 0; i < pawns.length; i++) {
+            if (t[i] == pawns[i]) {
+                result.push(t[pawns[i]])
+            }
+        }
+
+        return result.filter(num => num === key);
     }
-
 
     return (
         <View>
             <TouchableOpacity
-                onPress={() => GameStart()}
             >
                 Start Game
             </TouchableOpacity>
@@ -93,21 +100,17 @@ const CheckBoard = () => {
                                 height: 100,
                             }}
                         >
-
                             <TouchableOpacity
                                 style={{
+                                    display: "flex",
                                     width: "100%",
                                     height: "100%",
-                                    display: "flex",
-                                    justifyContent: "center",
-                                    alignItems: "center",
                                 }}
                             >
-                                {pawnInd(key) ? <Pawn keyNum={pawnInd(key)}></Pawn> : null}
+                                {pawnInd(key) ? <Pawn keyNum={blackInd(key)}></Pawn> : <div style={{ display: "none" }}></div>}
                             </TouchableOpacity>
                         </View>
                     ))}
-
                 </View>
             </View>
         </View>
