@@ -5,9 +5,13 @@ import React from "react"
 
 
 const CheckBoard = () => {
+
     let p = []
     const [pawns, setPawns]: any = React.useState([])
     let row = 0;
+
+
+
     for (let i = 0; i < 64; i++) {
         if (i % 8 == 0) {
             row++;
@@ -32,6 +36,7 @@ const CheckBoard = () => {
         }
     }
 
+
     for (let i = 0; i < 12; i++) {
         pawns.push(i);
     }
@@ -42,6 +47,7 @@ const CheckBoard = () => {
         pawns.push(i - 1);
     }
 
+
     const pawnInd = (key: number) => {
         let result = pawns.filter((el: any) => el === key)
         return result
@@ -50,19 +56,13 @@ const CheckBoard = () => {
         let t = [];
         let result = [];
         for (let i = 0; i < pawns.length; i++) {
-            if (pawns[i] == p[i]) {
+            if (p[i] === "black") {
                 t.push(i)
-            }
-            else if(p[i] === "") {
-                t.push(null)
             }
         }
 
-
         for (let i = 0; i < pawns.length; i++) {
-            if (t[i] == pawns[i]) {
                 result.push(t[pawns[i]])
-            }
         }
 
         return result.filter(num => num === key);
