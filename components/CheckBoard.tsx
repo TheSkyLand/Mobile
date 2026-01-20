@@ -9,8 +9,10 @@ const CheckBoard = () => {
     let p = []
     const [pawns, setPawns]: any = React.useState([])
     let row = 0;
-
-
+    let t = [];
+    let result: any = [];
+    let gameArray: any = []
+    let currentPawn = []
 
     for (let i = 0; i < 64; i++) {
         if (i % 8 == 0) {
@@ -47,14 +49,9 @@ const CheckBoard = () => {
         pawns.push(i - 1);
     }
 
-
-    const pawnInd = (key: number) => {
-        let result = pawns.filter((el: any) => el === key)
-        return result
-    }
     const blackInd = (key: number) => {
-        let t = [];
-        let result = [];
+
+
         for (let i = 0; i < pawns.length; i++) {
             if (p[i] === "black") {
                 t.push(i)
@@ -62,10 +59,16 @@ const CheckBoard = () => {
         }
 
         for (let i = 0; i < pawns.length; i++) {
-                result.push(t[pawns[i]])
+            result.push(t[pawns[i]])
         }
 
-        return result.filter(num => num === key);
+        return result = result.filter((num : any) => num === key)
+    }
+
+    const movePawn = (key: number) => {
+        console.log(result[key])
+        result.splice(key, 1)
+        currentPawn.push(key)
     }
 
     return (
@@ -101,13 +104,18 @@ const CheckBoard = () => {
                             }}
                         >
                             <TouchableOpacity
+                                onPress={
+                                    () => movePawn(key)
+                                }
                                 style={{
                                     display: "flex",
-                                    width: "100%",
-                                    height: "100%",
+                                    width: 100,
+                                    height: 100,
                                 }}
                             >
-                                {pawnInd(key) ? <Pawn keyNum={blackInd(key)}></Pawn> : <div style={{ display: "none" }}></div>}
+                                <Pawn
+                                    keyNum={blackInd(key)}
+                                ></Pawn>
                             </TouchableOpacity>
                         </View>
                     ))}
